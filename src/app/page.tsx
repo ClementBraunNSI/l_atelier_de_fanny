@@ -25,18 +25,18 @@ const services = [
 export default function Home() {
   return (
     <main className="flex-1">
-      <section className="relative overflow-hidden border-b border-rose-100/60 bg-white/60">
+      <section className="relative overflow-hidden border-b border-orange-100/60 bg-white/60">
         <div
           aria-hidden
-          className="pointer-events-none absolute -right-24 -top-24 size-[28rem] rounded-full bg-gradient-to-br from-rose-100/70 via-amber-50/50 to-transparent blur-2xl sm:size-[32rem]"
+          className="pointer-events-none absolute -right-24 -top-24 size-[28rem] rounded-full bg-gradient-to-br from-orange-100/70 via-amber-50/50 to-transparent blur-2xl sm:size-[32rem]"
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute -bottom-32 -left-24 size-[22rem] rounded-full bg-gradient-to-tr from-violet-100/60 to-sky-50/40 blur-2xl"
+          className="pointer-events-none absolute -bottom-32 -left-24 size-[22rem] rounded-full bg-gradient-to-tr from-orange-100/70 to-amber-50/50 blur-2xl"
         />
         <div className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:grid lg:grid-cols-12 lg:items-center lg:gap-10 lg:px-8 lg:py-20">
           <div className="lg:col-span-6">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-rose-500">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-orange-500">
               Mercerie · Atelier · {company.adresse.ville}
             </p>
             <h1 className="mt-3 text-4xl font-bold tracking-tight text-stone-800 sm:text-5xl lg:text-[3.25rem] lg:leading-[1.08]">
@@ -50,13 +50,13 @@ export default function Home() {
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link
                 href="/catalogue"
-                className="inline-flex h-11 items-center justify-center rounded-full bg-rose-300 px-7 text-sm font-semibold text-rose-950 shadow-sm transition hover:bg-rose-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-300"
+                className="inline-flex h-11 items-center justify-center rounded-full bg-orange-300 px-7 text-sm font-semibold text-orange-950 shadow-sm transition hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-300"
               >
                 Boutique
               </Link>
               <Link
                 href="/a-propos"
-                className="inline-flex h-11 items-center justify-center rounded-full border border-rose-200/90 bg-white/90 px-7 text-sm font-semibold text-stone-700 shadow-sm transition hover:border-rose-300 hover:bg-rose-50/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-300"
+                className="inline-flex h-11 items-center justify-center rounded-full border border-orange-200/90 bg-white/90 px-7 text-sm font-semibold text-stone-700 shadow-sm transition hover:border-orange-300 hover:bg-orange-50/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-300"
               >
                 L&apos;atelier
               </Link>
@@ -64,8 +64,8 @@ export default function Home() {
           </div>
 
           <div className="relative mt-10 lg:col-span-6 lg:mt-0">
-            <div className="relative overflow-hidden rounded-3xl border border-rose-100/90 bg-gradient-to-br from-rose-50/90 via-white to-violet-50/50 p-8 shadow-sm sm:p-10">
-              <div className="absolute right-6 top-6 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-stone-600 ring-1 ring-rose-100 backdrop-blur">
+            <div className="relative overflow-hidden rounded-3xl border border-orange-100/90 bg-gradient-to-br from-amber-50/90 via-white to-orange-50/60 p-8 shadow-sm sm:p-10">
+              <div className="absolute right-6 top-6 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-stone-600 ring-1 ring-orange-100 backdrop-blur">
                 Nouveautés bientôt
               </div>
               
@@ -73,7 +73,7 @@ export default function Home() {
                 href={company.instagram.profileUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-8 inline-flex text-sm font-semibold text-rose-600 hover:text-rose-700"
+                className="mt-8 inline-flex text-sm font-semibold text-orange-600 hover:text-orange-700"
               >
                 Un projet sur mesure ? Profil Instagram →
               </Link>
@@ -89,9 +89,9 @@ export default function Home() {
         id="prestations"
         className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8"
       >
-        <div className="flex flex-col gap-4 border-b border-rose-100/80 pb-8 sm:flex-row sm:items-end sm:justify-between">
+        <div className="flex flex-col gap-4 border-b border-orange-100/80 pb-8 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-rose-500">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-orange-500">
               Prestations
             </p>
             <h2 className="mt-2 text-2xl font-bold tracking-tight text-stone-800 sm:text-3xl">
@@ -106,7 +106,7 @@ export default function Home() {
             href={company.instagram.profileUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm font-semibold text-rose-600 hover:text-rose-700"
+            className="text-sm font-semibold text-orange-600 hover:text-orange-700"
           >
             Devis &amp; questions (profil Instagram) →
           </Link>
@@ -116,9 +116,9 @@ export default function Home() {
           {services.map((s, i) => (
             <li
               key={s.title}
-              className="flex flex-col rounded-2xl border border-rose-100/90 bg-white/90 p-6 shadow-sm transition hover:border-rose-200/90 hover:shadow-md sm:p-7"
+              className="flex flex-col rounded-2xl border border-orange-100/90 bg-white/90 p-6 shadow-sm transition hover:border-orange-200/90 hover:shadow-md sm:p-7"
             >
-              <span className="text-xs font-bold tabular-nums text-rose-500">
+              <span className="text-xs font-bold tabular-nums text-orange-500">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <h3 className="mt-2 text-lg font-bold text-stone-800">{s.title}</h3>
@@ -130,7 +130,7 @@ export default function Home() {
         </ul>
       </section>
 
-      <section className="border-t border-rose-100/70 bg-gradient-to-br from-rose-200/50 via-violet-200/40 to-sky-200/50">
+      <section className="border-t border-orange-100/70 bg-gradient-to-br from-amber-200/50 via-orange-200/45 to-orange-200/40">
         <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 px-4 py-12 sm:flex-row sm:items-center sm:px-6 lg:px-8">
           <div>
             <p className="text-sm font-semibold text-stone-800">
@@ -146,7 +146,7 @@ export default function Home() {
               href={company.instagram.profileUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-full bg-white/95 px-5 py-2.5 text-sm font-semibold text-stone-800 shadow-sm ring-1 ring-rose-100/80 transition hover:bg-white"
+              className="inline-flex items-center justify-center rounded-full bg-white/95 px-5 py-2.5 text-sm font-semibold text-stone-800 shadow-sm ring-1 ring-orange-100/80 transition hover:bg-white"
             >
               Profil Instagram — devis &amp; actus
             </Link>

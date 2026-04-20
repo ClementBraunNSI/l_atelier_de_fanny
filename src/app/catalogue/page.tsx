@@ -11,10 +11,10 @@ export default function CataloguePage() {
     <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
       <PageHeading
         title="Boutique"
-        description="Le catalogue sera relié à une base (ex. Supabase) et à une interface d’administration simple."
+        description="Bientôt disponible..."
       />
 
-      <div className="rounded-2xl border border-dashed border-rose-200/90 bg-white/90 p-8 text-center">
+      <div className="rounded-2xl border border-dashed border-orange-200/90 bg-white/90 p-8 text-center">
         <p className="text-sm font-medium text-stone-800">Bientôt disponible</p>
         <p className="mx-auto mt-2 max-w-md text-sm text-stone-600">
         </p>

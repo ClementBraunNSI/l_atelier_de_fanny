@@ -73,9 +73,9 @@ const etapes = [
 export default function AboutPage() {
   return (
     <main className="flex-1">
-      <section className="border-b border-rose-100/70 bg-white/70">
+      <section className="border-b border-orange-100/70 bg-white/70">
         <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-rose-500">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-orange-500">
             À propos · {company.adresse.ville} ({company.adresse.codePostal})
           </p>
           <h1 className="mt-3 text-4xl font-bold tracking-tight text-stone-800 sm:text-5xl">
@@ -101,13 +101,13 @@ export default function AboutPage() {
               href={company.instagram.profileUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-11 items-center justify-center rounded-full bg-rose-300 px-6 text-sm font-semibold text-rose-950 shadow-sm transition hover:bg-rose-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-300"
+              className="inline-flex h-11 items-center justify-center rounded-full bg-orange-300 px-6 text-sm font-semibold text-orange-950 shadow-sm transition hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-300"
             >
               Devis — profil Instagram
             </Link>
             <Link
               href="/catalogue"
-              className="inline-flex h-11 items-center justify-center rounded-full border border-rose-200/90 bg-white/90 px-6 text-sm font-semibold text-stone-700 shadow-sm transition hover:border-rose-300 hover:bg-rose-50/80"
+              className="inline-flex h-11 items-center justify-center rounded-full border border-orange-200/90 bg-white/90 px-6 text-sm font-semibold text-stone-700 shadow-sm transition hover:border-orange-300 hover:bg-orange-50/80"
             >
               Voir la boutique
             </Link>
@@ -116,7 +116,7 @@ export default function AboutPage() {
       </section>
 
       <section className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-        <div className="rounded-2xl border border-rose-100/90 bg-gradient-to-br from-rose-50/95 via-violet-50/40 to-amber-50/60 p-6 text-lg font-medium leading-relaxed text-stone-700 sm:p-8 sm:text-xl">
+        <div className="rounded-2xl border border-orange-100/90 bg-gradient-to-br from-amber-50/95 via-orange-50/50 to-orange-50/70 p-6 text-lg font-medium leading-relaxed text-stone-700 sm:p-8 sm:text-xl">
           À l’atelier, on met le cap sur une seule chose : transformer une idée
           — parfois floue au départ — en objet qu’on garde longtemps. Un
           vêtement qui tombe juste, un siège qui retrouve du confort, un
@@ -124,9 +124,9 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="border-y border-rose-100/70 bg-white/60 py-12 sm:py-16">
+      <section className="border-y border-orange-100/70 bg-white/60 py-12 sm:py-16">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-rose-500">
+          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-orange-500">
             Prestations
           </h2>
           <p className="mt-2 text-2xl font-bold tracking-tight text-stone-800 sm:text-3xl">
@@ -141,7 +141,7 @@ export default function AboutPage() {
             {prestations.map((p) => (
               <li
                 key={p.titre}
-                className="rounded-2xl border border-rose-100/90 bg-gradient-to-br from-rose-50/50 to-white p-6 shadow-sm"
+                className="rounded-2xl border border-orange-100/90 bg-gradient-to-br from-orange-50/50 to-white p-6 shadow-sm"
               >
                 <h3 className="text-lg font-bold text-stone-800">{p.titre}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-stone-600">
@@ -154,7 +154,7 @@ export default function AboutPage() {
       </section>
 
       <section className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-        <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-rose-500">
+        <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-orange-500">
           Engagements
         </h2>
         <p className="mt-2 text-2xl font-bold tracking-tight text-stone-800 sm:text-3xl">
@@ -164,11 +164,11 @@ export default function AboutPage() {
           {engagements.map((e) => (
             <li
               key={e.titre}
-              className="relative rounded-2xl border border-rose-100/90 bg-white/90 p-6 pt-8 shadow-sm"
+              className="relative rounded-2xl border border-orange-100/90 bg-white/90 p-6 pt-8 shadow-sm"
             >
               <span
                 aria-hidden
-                className="absolute left-6 top-0 -translate-y-1/2 rounded-full bg-rose-300 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-rose-950"
+                className="absolute left-6 top-0 -translate-y-1/2 rounded-full bg-orange-300 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-orange-950"
               >
                 +
               </span>
@@ -181,9 +181,9 @@ export default function AboutPage() {
         </ul>
       </section>
 
-      <section className="border-t border-rose-100/70 bg-gradient-to-br from-violet-200/40 via-rose-200/35 to-sky-200/45 py-12 sm:py-16">
+      <section className="border-t border-orange-100/70 bg-gradient-to-br from-amber-200/45 via-orange-200/40 to-orange-200/35 py-12 sm:py-16">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-rose-600">
+          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-orange-600">
             Coulisses
           </h2>
           <p className="mt-2 text-2xl font-bold tracking-tight text-stone-800 sm:text-3xl">
@@ -198,7 +198,7 @@ export default function AboutPage() {
             href={company.instagram.profileUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-8 inline-flex h-11 items-center justify-center rounded-full bg-white/95 px-6 text-sm font-semibold text-stone-800 shadow-sm ring-1 ring-rose-100/80 transition hover:bg-white"
+            className="mt-8 inline-flex h-11 items-center justify-center rounded-full bg-white/95 px-6 text-sm font-semibold text-stone-800 shadow-sm ring-1 ring-orange-100/80 transition hover:bg-white"
           >
             Profil @{company.instagram.handle} (Message)
           </Link>
@@ -206,7 +206,7 @@ export default function AboutPage() {
       </section>
 
       <section className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-        <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-rose-500">
+        <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-orange-500">
           Démarche
         </h2>
         <p className="mt-2 text-2xl font-bold tracking-tight text-stone-800 sm:text-3xl">
@@ -216,9 +216,9 @@ export default function AboutPage() {
           {etapes.map((e) => (
             <li
               key={e.pas}
-              className="flex gap-4 rounded-2xl border border-rose-100/90 bg-white/90 p-5 shadow-sm sm:gap-6 sm:p-6"
+              className="flex gap-4 rounded-2xl border border-orange-100/90 bg-white/90 p-5 shadow-sm sm:gap-6 sm:p-6"
             >
-              <span className="shrink-0 font-mono text-2xl font-bold tabular-nums text-rose-500 sm:text-3xl">
+              <span className="shrink-0 font-mono text-2xl font-bold tabular-nums text-orange-500 sm:text-3xl">
                 {e.pas}
               </span>
               <div>
@@ -232,7 +232,7 @@ export default function AboutPage() {
         </ol>
       </section>
 
-      <section className="border-t border-rose-100/70 bg-gradient-to-b from-rose-50/80 to-violet-50/30 py-12 sm:py-16">
+      <section className="border-t border-orange-100/70 bg-gradient-to-b from-amber-50/85 to-orange-50/40 py-12 sm:py-16">
         <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
           <h2 className="text-2xl font-bold tracking-tight text-stone-800 sm:text-3xl">
             L’atelier vous attend
@@ -249,13 +249,13 @@ export default function AboutPage() {
               href={company.instagram.profileUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-11 items-center justify-center rounded-full bg-rose-300 px-7 text-sm font-semibold text-rose-950 shadow-sm transition hover:bg-rose-400"
+              className="inline-flex h-11 items-center justify-center rounded-full bg-orange-300 px-7 text-sm font-semibold text-orange-950 shadow-sm transition hover:bg-orange-400"
             >
               Instagram — devis
             </Link>
             <Link
               href="/mentions-legales"
-              className="inline-flex h-11 items-center justify-center rounded-full border border-rose-200/90 bg-white/90 px-7 text-sm font-semibold text-stone-700 transition hover:bg-white"
+              className="inline-flex h-11 items-center justify-center rounded-full border border-orange-200/90 bg-white/90 px-7 text-sm font-semibold text-stone-700 transition hover:bg-white"
             >
               Infos légales
             </Link>

@@ -17,8 +17,8 @@ export default function ContactPage() {
         description="Pour un devis, une idée de sur-mesure ou une question sur une prestation, tout passe par le profil Instagram."
       />
 
-      <div className="rounded-2xl border border-rose-100/90 bg-gradient-to-br from-rose-50/95 via-violet-50/30 to-amber-50/50 p-6 shadow-sm sm:p-8">
-        <h2 className="text-sm font-semibold uppercase tracking-wider text-rose-600">
+      <div className="rounded-2xl border border-orange-100/90 bg-gradient-to-br from-amber-50/95 via-orange-50/70 to-orange-50/50 p-6 shadow-sm sm:p-8">
+        <h2 className="text-sm font-semibold uppercase tracking-wider text-orange-600">
           Devis &amp; demandes
         </h2>
         <p className="mt-3 text-base leading-relaxed text-stone-700">
@@ -35,7 +35,7 @@ export default function ContactPage() {
             href={company.instagram.profileUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex h-11 items-center justify-center rounded-full bg-rose-300 px-6 text-sm font-semibold text-rose-950 shadow-sm transition hover:bg-rose-400"
+            className="inline-flex h-11 items-center justify-center rounded-full bg-orange-300 px-6 text-sm font-semibold text-orange-950 shadow-sm transition hover:bg-orange-400"
           >
             Ouvrir le profil Instagram
           </Link>
@@ -46,8 +46,8 @@ export default function ContactPage() {
         </p>
       </div>
 
-      <div className="mt-10 rounded-2xl border border-rose-100/80 bg-white/90 p-6 shadow-sm sm:p-8">
-        <h2 className="text-sm font-semibold uppercase tracking-wider text-rose-400">
+      <div className="mt-10 rounded-2xl border border-orange-100/80 bg-white/90 p-6 shadow-sm sm:p-8">
+        <h2 className="text-sm font-semibold uppercase tracking-wider text-orange-400">
           Atelier
         </h2>
         <p className="mt-3 text-base font-medium text-stone-800">
@@ -62,7 +62,7 @@ export default function ContactPage() {
           SIRET {company.siretSiege} ·{" "}
           <a
             href={company.lienPappers}
-            className="font-medium text-rose-600 underline-offset-2 hover:text-rose-700 hover:underline"
+            className="font-medium text-orange-600 underline-offset-2 hover:text-orange-700 hover:underline"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -71,7 +71,7 @@ export default function ContactPage() {
         </p>
       </div>
 
-      <div className="prose-page mt-10 space-y-4">
+      <div className="porange-page mt-10 space-y-4">
         <p>
           <strong>E-mail ou téléphone</strong> : vous pourrez les ajouter ici
           plus tard si vous souhaitez un second canal (hors devis Instagram).

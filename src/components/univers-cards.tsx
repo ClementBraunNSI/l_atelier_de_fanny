@@ -9,7 +9,7 @@ const univers = [
     href: "/catalogue",
     cta: "Voir la boutique",
     external: false,
-    gradient: "from-violet-100/95 via-fuchsia-50/90 to-amber-50/95",
+    gradient: "from-orange-100/95 via-amber-50/90 to-orange-50/95",
   },
   {
     eyebrow: "Couture & retouches",
@@ -18,7 +18,7 @@ const univers = [
     href: company.instagram.profileUrl,
     cta: "Demander un devis",
     external: true,
-    gradient: "from-sky-100/95 via-emerald-50/90 to-teal-50/95",
+    gradient: "from-amber-100/95 via-orange-50/90 to-yellow-50/95",
   },
   {
     eyebrow: "Ameublement",
@@ -27,7 +27,7 @@ const univers = [
     href: company.instagram.profileUrl,
     cta: "Parler du projet",
     external: true,
-    gradient: "from-amber-100/95 via-orange-50/90 to-rose-50/95",
+    gradient: "from-orange-100/95 via-orange-50/90 to-amber-50/95",
   },
 ] as const;
 
@@ -35,7 +35,7 @@ export function UniversCards() {
   return (
     <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
       <div className="max-w-2xl">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-rose-500">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-orange-500">
           Univers
         </p>
         <h2 className="mt-2 text-2xl font-bold tracking-tight text-stone-800 sm:text-3xl">
@@ -56,7 +56,7 @@ export function UniversCards() {
               {...(u.external
                 ? { target: "_blank", rel: "noopener noreferrer" }
                 : {})}
-              className="group relative flex min-h-[220px] flex-col overflow-hidden rounded-3xl border border-rose-100/90 bg-white/90 p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-rose-200/90 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-300 sm:min-h-[260px] sm:p-7"
+              className="group relative flex min-h-[220px] flex-col overflow-hidden rounded-3xl border border-orange-100/90 bg-white/90 p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-orange-200/90 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-300 sm:min-h-[260px] sm:p-7"
             >
               <div
                 aria-hidden
@@ -72,7 +72,7 @@ export function UniversCards() {
                 <p className="mt-2 flex-1 text-sm leading-relaxed text-stone-600">
                   {u.text}
                 </p>
-                <span className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-rose-600 group-hover:gap-2">
+                <span className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-orange-600 group-hover:gap-2">
                   {u.cta}
                   <span aria-hidden>→</span>
                 </span>
