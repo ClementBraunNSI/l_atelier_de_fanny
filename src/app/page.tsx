@@ -1,4 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
+import { PhotoPlaceholder } from "@/components/photo-placeholder";
 import { TrustStrip } from "@/components/trust-strip";
 import { UniversCards } from "@/components/univers-cards";
 import { company } from "@/lib/company";
@@ -69,16 +71,42 @@ export default function Home() {
           </div>
 
           <div className="relative mt-10 lg:col-span-6 lg:mt-0">
-            <div className="relative overflow-hidden rounded-3xl border border-orange-100/90 bg-gradient-to-br from-amber-50/90 via-white to-orange-50/60 p-8 shadow-sm sm:p-10">
-              <div className="absolute right-6 top-6 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-stone-600 ring-1 ring-orange-100 backdrop-blur">
-                Nouveautés bientôt
+            <div className="flex flex-col gap-3 sm:gap-4">
+              <div className="relative overflow-hidden rounded-2xl border border-orange-100/80 shadow-sm ring-1 ring-orange-50/60">
+                <span className="absolute right-3 top-3 z-10 rounded-full bg-white/95 px-3 py-1 text-xs font-semibold text-stone-600 shadow-sm ring-1 ring-orange-100 backdrop-blur">
+                  Nouveautés bientôt
+                </span>
+                <div className="relative aspect-[4/3] min-h-[200px] w-full sm:min-h-[240px]">
+                  <Image
+                    src="/images/siege.jpg"
+                    alt="Siège restauré : bois noir, assise velours bleu-vert et dossier tapissé d’un motif perroquet, finition clous décoratifs."
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    priority
+                  />
+                </div>
               </div>
-              
+              <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                <div className="relative aspect-square overflow-hidden rounded-2xl border border-orange-100/80 shadow-sm ring-1 ring-orange-50/60">
+                  <Image
+                    src="/images/broderie.jpg"
+                    alt="Détail couture : machine à broder posant un appliqué cœur en tissu Liberty sur support vert d’eau."
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 50vw, 25vw"
+                  />
+                </div>
+                <PhotoPlaceholder
+                  caption="L’atelier en photo — à venir"
+                  aspectClass="aspect-square min-h-0"
+                />
+              </div>
               <Link
                 href={company.instagram.profileUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-8 inline-flex text-sm font-semibold text-orange-600 hover:text-orange-700"
+                className="inline-flex text-sm font-semibold text-orange-600 hover:text-orange-700"
               >
                 Un projet sur mesure ? Profil Instagram →
               </Link>
@@ -88,6 +116,46 @@ export default function Home() {
       </section>
 
       <TrustStrip />
+
+      <section
+        className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8"
+        aria-labelledby="home-gallery-heading"
+      >
+        <div className="mb-6 max-w-2xl">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-orange-500">
+            Galerie
+          </p>
+          <h2
+            id="home-gallery-heading"
+            className="mt-1 text-2xl font-bold tracking-tight text-stone-800 sm:text-3xl"
+          >
+            En images
+          </h2>
+          <p className="mt-2 text-sm text-stone-600 sm:text-base">
+            D’autres clichés viendront compléter la galerie (fichiers dans{" "}
+            <code className="rounded bg-orange-50 px-1 text-xs text-stone-700">
+              public/images/
+            </code>
+            ).
+          </p>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
+          <PhotoPlaceholder
+            caption="Réalisation ou avant / après — à venir"
+            aspectClass="aspect-[4/3]"
+          />
+          <PhotoPlaceholder
+            caption="Autre création ou mercerie — à venir"
+            aspectClass="aspect-[4/3]"
+          />
+          <PhotoPlaceholder
+            caption="L’atelier — photo à venir"
+            aspectClass="aspect-[4/3]"
+            className="sm:col-span-2 lg:col-span-1"
+          />
+        </div>
+      </section>
+
       <UniversCards />
 
       <section

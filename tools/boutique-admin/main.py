@@ -18,10 +18,11 @@ from __future__ import annotations
 import json
 import os
 import re
+import shutil
 import sys
 import tkinter as tk
 from pathlib import Path
-from tkinter import messagebox, ttk
+from tkinter import filedialog, messagebox, ttk
 from typing import Any
 from uuid import uuid4
 
@@ -188,18 +189,34 @@ class BoutiqueAdminApp(tk.Tk):
         self.var_published = tk.BooleanVar(value=True)
 
         row = 0
-        for label, var, widget in (
+        for label, var, _w in (
             ("Identifiant (slug, unique)", self.var_id, "entry"),
             ("Nom", self.var_name, "entry"),
             ("Description", self.var_description, "entry"),
             ("Prix (euros, ex. 12 ou 12,50)", self.var_price, "entry"),
-            ("Image (optionnel), ex. /boutique/photo.webp", self.var_image, "entry"),
         ):
             ttk.Label(right, text=label).grid(row=row, column=0, sticky=tk.W, pady=2)
-            if widget == "entry":
-                e = ttk.Entry(right, textvariable=var, width=52)
-                e.grid(row=row + 1, column=0, sticky=tk.EW, pady=(0, 8))
+            ttk.Entry(right, textvariable=var, width=52).grid(
+                row=row + 1, column=0, sticky=tk.EW, pady=(0, 8)
+            )
             row += 2
+
+        ttk.Label(
+            right,
+            text="Image (facultatif) — copiée automatiquement dans public/boutique/",
+        ).grid(row=row, column=0, sticky=tk.W, pady=2)
+        img_frame = ttk.Frame(right)
+        img_frame.grid(row=row + 1, column=0, sticky=tk.EW, pady=(0, 8))
+        img_frame.columnconfigure(0, weight=1)
+        ttk.Entry(img_frame, textvariable=self.var_image).grid(
+            row=0, column=0, sticky=tk.EW, padx=(0, 8)
+        )
+        ttk.Button(
+            img_frame,
+            text="Parcourir…",
+            command=self.browse_product_image,
+        ).grid(row=0, column=1, sticky=tk.E)
+        row += 2
 
         pub = ttk.Checkbutton(
             right,
@@ -223,9 +240,45 @@ class BoutiqueAdminApp(tk.Tk):
         bottom.pack(fill=tk.X)
         ttk.Label(
             bottom,
-            text="Astuce : fichiers dans public/boutique/ — indiquez l’URL du site : /boutique/nom.jpg (pas ../public/…).",
+            text="Astuce : « Parcourir… » copie la photo dans public/boutique/ et remplit le lien. "
+            "Vous pouvez aussi taper /boutique/nom.jpg à la main si besoin.",
             wraplength=820,
         ).pack(anchor=tk.W)
+
+    def browse_product_image(self) -> None:
+        """Choisit une image sur le disque, la copie dans public/boutique/, remplit le champ."""
+        project_root = self.path.parent.parent
+        boutique_dir = project_root / "public" / "boutique"
+        if sys.platform == "win32":
+            _img_patterns = "*.jpg;*.jpeg;*.png;*.webp;*.gif;*.JPG;*.JPEG;*.PNG;*.WEBP;*.GIF"
+        else:
+            _img_patterns = "*.jpg *.jpeg *.png *.webp *.gif *.JPG *.JPEG *.PNG *.WEBP *.GIF"
+        path_str = filedialog.askopenfilename(
+            parent=self,
+            title="Choisir une photo pour le produit",
+            filetypes=[
+                ("Images", _img_patterns),
+                ("Tous les fichiers", "*.*"),
+            ],
+        )
+        if not path_str:
+            return
+        src = Path(path_str).expanduser().resolve()
+        if not src.is_file():
+            messagebox.showerror("Image", "Le fichier choisi est introuvable.")
+            return
+        dest = boutique_dir / src.name
+        try:
+            boutique_dir.mkdir(parents=True, exist_ok=True)
+            if src.resolve() != dest.resolve():
+                shutil.copy2(src, dest)
+        except OSError as e:
+            messagebox.showerror(
+                "Image",
+                f"Impossible de copier l’image vers public/boutique/ :\n{e}",
+            )
+            return
+        self.var_image.set(f"/boutique/{dest.name}")
 
     def _refresh_list(self) -> None:
         self.listbox.delete(0, tk.END)

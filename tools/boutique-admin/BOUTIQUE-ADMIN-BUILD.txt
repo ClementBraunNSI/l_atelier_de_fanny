@@ -1,0 +1,23 @@
+Build des exécutables (PyInstaller)
+===================================
+
+macOS (sur un Mac, Python 3.10+) :
+  ./scripts/build-macos.sh
+
+  Sortie : dist/BoutiqueAdmin.app
+  Utilisation : copiez l’app à la racine du dépôt (à côté du dossier src/), ou
+  définissez BOUTIQUE_ADMIN_PROJECT_ROOT=/chemin/vers/l_atelier_de_fanny
+
+Windows (sur une machine Windows, Python 3.10+) :
+  powershell -ExecutionPolicy Bypass -File .\scripts\build-windows.ps1
+
+  Sortie : dist\BoutiqueAdmin\BoutiqueAdmin.exe
+  Même consigne : placez le dossier dist\BoutiqueAdmin\ à la racine du dépôt
+  (à côté de src\) ou utilisez BOUTIQUE_ADMIN_PROJECT_ROOT.
+
+Note : on ne peut pas générer un .exe Windows depuis macOS avec PyInstaller ;
+il faut lancer le script PowerShell sur Windows.
+
+Cache : PYINSTALLER_CONFIG_DIR est fixé vers .pyinstaller-cache/ dans ce dossier
+(voir scripts de build). Les dossiers build/, dist/, .venv-build/ et ce cache
+sont listés dans .gitignore à la racine du dépôt.
