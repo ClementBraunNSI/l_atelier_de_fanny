@@ -14,11 +14,9 @@ export default function CataloguePage() {
         description="Le catalogue sera relié à une base (ex. Supabase) et à une interface d’administration simple."
       />
 
-      <div className="rounded-2xl border border-dashed border-stone-300 bg-white p-8 text-center">
-        <p className="text-sm font-medium text-stone-900">Bientôt disponible</p>
+      <div className="rounded-2xl border border-dashed border-rose-200/90 bg-white/90 p-8 text-center">
+        <p className="text-sm font-medium text-stone-800">Bientôt disponible</p>
         <p className="mx-auto mt-2 max-w-md text-sm text-stone-600">
-          Fiches produit (catégorie, matière, options, prix), paiement par carte
-          via Stripe Checkout, facture PDF après commande validée.
         </p>
       </div>
     </main>

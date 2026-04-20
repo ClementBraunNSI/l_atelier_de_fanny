@@ -77,17 +77,17 @@ export function TrustStrip() {
   return (
     <section
       aria-label="Nos engagements"
-      className="border-y border-stone-200/80 bg-white"
+      className="border-y border-rose-100/70 bg-white/70"
     >
       <div className="mx-auto grid max-w-6xl gap-6 px-4 py-8 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:gap-8 lg:px-8 lg:py-10">
         {items.map((item) => (
           <div
             key={item.title}
-            className="flex gap-4 rounded-2xl border border-stone-100 bg-[#faf8f6] p-4 lg:flex-col lg:border-0 lg:bg-transparent lg:p-0"
+            className="flex gap-4 rounded-2xl border border-rose-100/80 bg-gradient-to-br from-rose-50/80 to-violet-50/40 p-4 lg:flex-col lg:border-0 lg:bg-transparent lg:p-0"
           >
-            <div className="shrink-0 text-rose-700">{item.icon}</div>
+            <div className="shrink-0 text-rose-500">{item.icon}</div>
             <div>
-              <p className="font-semibold text-stone-900">{item.title}</p>
+              <p className="font-semibold text-stone-800">{item.title}</p>
               <p className="mt-1 text-sm leading-snug text-stone-600">
                 {item.text}
               </p>

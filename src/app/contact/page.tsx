@@ -17,15 +17,15 @@ export default function ContactPage() {
         description="Pour un devis, une idée de sur-mesure ou une question sur une prestation, tout passe par le profil Instagram."
       />
 
-      <div className="rounded-2xl border border-rose-100 bg-gradient-to-br from-rose-50 to-amber-50/60 p-6 shadow-sm sm:p-8">
-        <h2 className="text-sm font-semibold uppercase tracking-wider text-rose-900">
+      <div className="rounded-2xl border border-rose-100/90 bg-gradient-to-br from-rose-50/95 via-violet-50/30 to-amber-50/50 p-6 shadow-sm sm:p-8">
+        <h2 className="text-sm font-semibold uppercase tracking-wider text-rose-600">
           Devis &amp; demandes
         </h2>
         <p className="mt-3 text-base leading-relaxed text-stone-700">
           Ouvrez le{" "}
-          <strong className="text-stone-900">profil public</strong>{" "}
-          <strong className="text-stone-900">@{company.instagram.handle}</strong>
-          , puis utilisez le bouton <strong className="text-stone-900">Message</strong>{" "}
+          <strong className="text-stone-800">profil public</strong>{" "}
+          <strong className="text-stone-800">@{company.instagram.handle}</strong>
+          , puis utilisez le bouton <strong className="text-stone-800">Message</strong>{" "}
           (sur l’application ou le site Instagram). Vous pouvez y envoyer des
           photos, des dimensions et votre demande — c’est le seul canal utilisé
           pour discuter d’un projet avant devis.
@@ -35,7 +35,7 @@ export default function ContactPage() {
             href={company.instagram.profileUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex h-11 items-center justify-center rounded-full bg-rose-700 px-6 text-sm font-semibold text-white shadow-sm transition hover:bg-rose-800"
+            className="inline-flex h-11 items-center justify-center rounded-full bg-rose-300 px-6 text-sm font-semibold text-rose-950 shadow-sm transition hover:bg-rose-400"
           >
             Ouvrir le profil Instagram
           </Link>
@@ -46,11 +46,11 @@ export default function ContactPage() {
         </p>
       </div>
 
-      <div className="mt-10 rounded-2xl border border-stone-200 bg-white p-6 shadow-sm sm:p-8">
-        <h2 className="text-sm font-semibold uppercase tracking-wider text-stone-500">
+      <div className="mt-10 rounded-2xl border border-rose-100/80 bg-white/90 p-6 shadow-sm sm:p-8">
+        <h2 className="text-sm font-semibold uppercase tracking-wider text-rose-400">
           Atelier
         </h2>
-        <p className="mt-3 text-base font-medium text-stone-900">
+        <p className="mt-3 text-base font-medium text-stone-800">
           {company.enseigne}
         </p>
         <p className="mt-2 text-stone-600">
@@ -62,7 +62,7 @@ export default function ContactPage() {
           SIRET {company.siretSiege} ·{" "}
           <a
             href={company.lienPappers}
-            className="font-medium text-rose-800 underline-offset-2 hover:underline"
+            className="font-medium text-rose-600 underline-offset-2 hover:text-rose-700 hover:underline"
             target="_blank"
             rel="noopener noreferrer"
           >

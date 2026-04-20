@@ -6,7 +6,7 @@ type PageHeadingProps = {
 export function PageHeading({ title, description }: PageHeadingProps) {
   return (
     <header className="mb-10 sm:mb-12">
-      <h1 className="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl">
+      <h1 className="text-3xl font-bold tracking-tight text-stone-800 sm:text-4xl">
         {title}
       </h1>
       {description ? (

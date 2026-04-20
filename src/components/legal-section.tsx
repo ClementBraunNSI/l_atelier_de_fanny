@@ -6,7 +6,7 @@ type LegalSectionProps = {
 export function LegalSection({ title, children }: LegalSectionProps) {
   return (
     <section className="scroll-mt-24">
-      <h2 className="border-b border-slate-200 pb-2 text-lg font-semibold tracking-tight text-slate-900">
+      <h2 className="border-b border-rose-100 pb-2 text-lg font-semibold tracking-tight text-stone-800">
         {title}
       </h2>
       <div className="prose-page mt-4 space-y-3 text-sm text-stone-600 sm:text-[0.9375rem]">

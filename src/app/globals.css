@@ -1,14 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --background: #faf8f6;
-  --foreground: #1c1917;
+  /* Fond général : blanc rosé très doux */
+  --background: #fef8f9;
+  --foreground: #44403c;
   --muted: #78716c;
   --card: #ffffff;
-  --accent: #be123c;
-  --accent-hover: #9f1239;
-  --ring: #e11d48;
-  --border: #e7e5e4;
+  /* Accent pastel (rose poudré) */
+  --accent: #f0a8b8;
+  --accent-hover: #e895a8;
+  --ring: #f9a8d4;
+  --border: #fce7ec;
 }
 
 @theme inline {
@@ -32,9 +34,9 @@ body {
 }
 
 .prose-page strong {
-  @apply font-semibold text-stone-900;
+  @apply font-semibold text-stone-800;
 }
 
 .prose-page a {
-  @apply font-medium text-rose-800 underline-offset-2 hover:text-rose-950 hover:underline;
+  @apply font-medium text-rose-600 underline-offset-2 hover:text-rose-700 hover:underline;
 }
