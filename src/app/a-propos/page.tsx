@@ -5,7 +5,7 @@ import { company } from "@/lib/company";
 export const metadata: Metadata = {
   title: "À propos",
   description:
-    "L'Atelier de Fanny à Courrières : mercerie, couture sur mesure, ameublement textile et accessoires faits main dans les Hauts-de-France.",
+    "L'Atelier de Fanny à Courrières : mercerie, couture, broderie sur tissu (logos et motifs sur demande), ameublement textile et accessoires faits main dans les Hauts-de-France.",
 };
 
 const prestations = [
@@ -28,6 +28,11 @@ const prestations = [
     titre: "Mercerie & accessoires",
     texte:
       "Mercerie, petites créations et accessoires en tissu : bananes, sacs, pochettes, idées cadeaux… Souvent sur commande, toujours avec le souci du détail.",
+  },
+  {
+    titre: "Broderie sur tissu",
+    texte:
+      "Broderie à la demande sur vos textiles : logos, monogrammes ou motifs fournis (fichier adapté) ou imaginés avec vous. Idéal pour personnaliser vêtements, sacs, linge, petites séries ou objets promo — devis après précision du support et du rendu souhaité.",
   },
 ] as const;
 
@@ -83,8 +88,9 @@ export default function AboutPage() {
           </h1>
           <p className="mt-5 text-lg font-medium leading-relaxed text-stone-700 sm:text-xl">
             Bienvenue chez <strong>{company.enseigne}</strong> : un atelier où la
-            mercerie rencontre la couture sur mesure, l’ameublement textile et
-            les accessoires faits main — pour les particuliers, les familles et
+            mercerie rencontre la couture sur mesure, la broderie sur tissu
+            (logos et motifs sur demande), l’ameublement textile et les
+            accessoires faits main — pour les particuliers, les familles et
             les petits projets pros qui cherchent du sur-mesure, pas du
             standardisé.
           </p>
@@ -133,9 +139,9 @@ export default function AboutPage() {
             Tout ce que l’atelier peut faire pour vous
           </p>
           <p className="mt-3 max-w-2xl text-stone-600">
-            Une mercerie qui vit, une couture qui s’adapte à votre quotidien, et
-            des prestations pour les projets un peu plus techniques — tout au
-            même endroit.
+            Une mercerie qui vit, une couture qui s’adapte à votre quotidien, la
+            broderie pour vos marquages et personnalisations, et des prestations
+            pour les projets un peu plus techniques — tout au même endroit.
           </p>
           <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:gap-5">
             {prestations.map((p) => (

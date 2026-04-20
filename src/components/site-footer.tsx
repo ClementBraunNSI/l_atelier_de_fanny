@@ -8,7 +8,8 @@ export function SiteFooter() {
         <div>
           <p className="text-base font-bold text-stone-800">{company.enseigne}</p>
           <p className="mt-2 max-w-xs text-sm leading-relaxed text-stone-600">
-            Mercerie, couture, ameublement textile et accessoires faits main.
+            Mercerie, couture, broderie sur tissu, ameublement textile et
+            accessoires faits main.
           </p>
         </div>
         <div>

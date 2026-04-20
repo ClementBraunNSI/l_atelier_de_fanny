@@ -6,7 +6,7 @@ import { company } from "@/lib/company";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Contacter L'Atelier de Fanny pour un devis : rendez-vous sur le profil Instagram.",
+    "Contacter L'Atelier de Fanny pour un devis (couture, broderie sur tissu, etc.) : rendez-vous sur le profil Instagram.",
 };
 
 export default function ContactPage() {

@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     template: "%s | L'Atelier de Fanny",
   },
   description:
-    "Mercerie, créations en tissu, retouches, ameublement et prestations de couture à Courrières.",
+    "Mercerie, couture, broderie sur tissu (logos et motifs sur demande), ameublement et accessoires faits main à Courrières.",
 };
 
 export default function RootLayout({

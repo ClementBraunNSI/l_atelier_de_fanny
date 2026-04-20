@@ -20,6 +20,10 @@ const services = [
     title: "Accessoires en tissu",
     text: "Bananes, sacs, petite maroquinerie textile et accessoires sur commande.",
   },
+  {
+    title: "Broderie sur tissu",
+    text: "Sur demande : logos, monogrammes ou motifs brodés selon votre fichier ou votre idée — vêtements, accessoires, linge, petites séries ou goodies. Devis après échange sur le projet.",
+  },
 ] as const;
 
 export default function Home() {
@@ -44,7 +48,8 @@ export default function Home() {
             </h1>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-stone-600 sm:text-lg">
               Objets et prestations autour du fil et du tissu : mercerie,
-              couture, ameublement et accessoires faits main — navigation simple,
+              couture, broderie personnalisée, ameublement et accessoires faits
+              main — navigation simple,
               univers clairs, infos visibles dès l&apos;accueil.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
