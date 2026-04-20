@@ -72,10 +72,7 @@ export default function ContactPage() {
       </div>
 
       <div className="porange-page mt-10 space-y-4">
-        <p>
-          <strong>E-mail ou téléphone</strong> : vous pourrez les ajouter ici
-          plus tard si vous souhaitez un second canal (hors devis Instagram).
-        </p>
+        
       </div>
     </main>
   );
