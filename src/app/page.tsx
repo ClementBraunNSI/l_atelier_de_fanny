@@ -117,45 +117,6 @@ export default function Home() {
 
       <TrustStrip />
 
-      <section
-        className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8"
-        aria-labelledby="home-gallery-heading"
-      >
-        <div className="mb-6 max-w-2xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-orange-500">
-            Galerie
-          </p>
-          <h2
-            id="home-gallery-heading"
-            className="mt-1 text-2xl font-bold tracking-tight text-stone-800 sm:text-3xl"
-          >
-            En images
-          </h2>
-          <p className="mt-2 text-sm text-stone-600 sm:text-base">
-            D’autres clichés viendront compléter la galerie (fichiers dans{" "}
-            <code className="rounded bg-orange-50 px-1 text-xs text-stone-700">
-              public/images/
-            </code>
-            ).
-          </p>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
-          <PhotoPlaceholder
-            caption="Réalisation ou avant / après — à venir"
-            aspectClass="aspect-[4/3]"
-          />
-          <PhotoPlaceholder
-            caption="Autre création ou mercerie — à venir"
-            aspectClass="aspect-[4/3]"
-          />
-          <PhotoPlaceholder
-            caption="L’atelier — photo à venir"
-            aspectClass="aspect-[4/3]"
-            className="sm:col-span-2 lg:col-span-1"
-          />
-        </div>
-      </section>
-
       <UniversCards />
 
       <section
