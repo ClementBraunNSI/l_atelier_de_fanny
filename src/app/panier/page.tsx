@@ -8,6 +8,7 @@ import {
 } from "@/app/actions/shop";
 import { PageHeading } from "@/components/page-heading";
 import { formatPrice, getCartSummary, requireUser } from "@/lib/shop";
+import { getErrorMessage, getSuccessMessage } from "@/lib/ui-messages";
 
 export const metadata: Metadata = {
   title: "Panier",
@@ -20,8 +21,10 @@ type Props = {
 
 export default async function PanierPage({ searchParams }: Props) {
   const params = (await searchParams) ?? {};
-  const message = typeof params.message === "string" ? params.message : null;
-  const error = typeof params.error === "string" ? params.error : null;
+  const messageCode = typeof params.message === "string" ? params.message : null;
+  const errorCode = typeof params.error === "string" ? params.error : null;
+  const message = getSuccessMessage(messageCode);
+  const error = getErrorMessage(errorCode);
 
   const user = await requireUser();
   const summary = await getCartSummary(user.id);
@@ -35,16 +38,12 @@ export default async function PanierPage({ searchParams }: Props) {
 
       {message && (
         <p className="mb-5 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800">
-          {message === "order-created"
-            ? "Commande créée avec succès."
-            : "Action terminée."}
+          {message}
         </p>
       )}
       {error && (
         <p className="mb-5 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700">
-          {error === "stock"
-            ? "Stock insuffisant pour au moins un article. Mettez à jour le panier."
-            : "Action impossible pour le moment."}
+          {error}
         </p>
       )}
 

@@ -37,8 +37,21 @@ export default async function CataloguePage() {
         <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
           {products.map((product) => (
             <li key={product.id}>
-              <ProductCard product={product} />
-              <div className="mt-3">
+              <Link
+                href={`/catalogue/${product.slug}`}
+                className="group block rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-300"
+              >
+                <div className="transition group-hover:-translate-y-0.5 group-hover:shadow-md">
+                  <ProductCard product={product} />
+                </div>
+              </Link>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <Link
+                  href={`/catalogue/${product.slug}`}
+                  className="inline-flex rounded-full border border-orange-200 bg-white px-4 py-2 text-sm font-semibold text-stone-700 transition hover:bg-orange-50"
+                >
+                  En savoir plus
+                </Link>
                 {user ? (
                   <form action={addToCartAction}>
                     <input type="hidden" name="productId" value={product.id} />

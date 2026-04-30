@@ -4,6 +4,7 @@ import {
   deleteProductAction,
   updateProductAction,
 } from "@/app/actions/shop";
+import { ImagePathField } from "@/components/image-path-field";
 import { PageHeading } from "@/components/page-heading";
 import {
   formatPrice,
@@ -11,13 +12,24 @@ import {
   listOrdersForAdmin,
   requireAdmin,
 } from "@/lib/shop";
+import { getErrorMessage, getSuccessMessage } from "@/lib/ui-messages";
 
 export const metadata: Metadata = {
   title: "Admin",
   description: "Gestion des produits et suivi des commandes.",
 };
 
-export default async function AdminPage() {
+type Props = {
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+};
+
+export default async function AdminPage({ searchParams }: Props) {
+  const params = (await searchParams) ?? {};
+  const messageCode = typeof params.message === "string" ? params.message : null;
+  const errorCode = typeof params.error === "string" ? params.error : null;
+  const message = getSuccessMessage(messageCode);
+  const error = getErrorMessage(errorCode);
+
   await requireAdmin();
   const products = await listAllProductsForAdmin();
   const orders = await listOrdersForAdmin();
@@ -28,6 +40,16 @@ export default async function AdminPage() {
         title="Administration boutique"
         description="Ajouter/éditer les produits et suivre les dernières commandes."
       />
+      {message ? (
+        <p className="mb-5 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800">
+          {message}
+        </p>
+      ) : null}
+      {error ? (
+        <p className="mb-5 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700">
+          {error}
+        </p>
+      ) : null}
 
       <section className="rounded-2xl border border-orange-100/90 bg-white/95 p-5 shadow-sm sm:p-6">
         <h2 className="text-lg font-semibold text-stone-800">Ajouter un produit</h2>
@@ -60,10 +82,11 @@ export default async function AdminPage() {
             placeholder="Quantité"
             className="rounded-lg border border-orange-200 px-3 py-2 text-sm"
           />
-          <input
+          <ImagePathField
             name="imagePath"
-            placeholder="/boutique/photo.jpg"
-            className="sm:col-span-2 rounded-lg border border-orange-200 px-3 py-2 text-sm"
+            className="sm:col-span-2"
+            inputClassName="w-full rounded-lg border border-orange-200 px-3 py-2 text-sm"
+            hint="Cliquez sur Parcourir pour pré-remplir le chemin image. Ensuite placez le fichier dans public/boutique/."
           />
           <textarea
             name="description"
@@ -127,10 +150,11 @@ export default async function AdminPage() {
                     defaultValue={product.quantity}
                     className="rounded-lg border border-orange-200 px-3 py-2 text-sm"
                   />
-                  <input
+                  <ImagePathField
                     name="imagePath"
                     defaultValue={product.imagePath ?? ""}
-                    className="sm:col-span-2 rounded-lg border border-orange-200 px-3 py-2 text-sm"
+                    className="sm:col-span-2"
+                    inputClassName="w-full rounded-lg border border-orange-200 px-3 py-2 text-sm"
                   />
                   <textarea
                     name="description"

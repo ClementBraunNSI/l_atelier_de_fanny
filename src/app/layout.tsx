@@ -27,7 +27,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className={`${plusJakarta.variable} h-full scroll-smooth`}>
+    <html
+      lang="fr"
+      className={`${plusJakarta.variable} h-full scroll-smooth`}
+      data-scroll-behavior="smooth"
+    >
       <body className="min-h-full flex flex-col font-sans antialiased">
         <PromoBar />
         <SiteHeader />

@@ -99,6 +99,31 @@ export async function listPublishedProducts(): Promise<Product[]> {
   }));
 }
 
+export async function getPublishedProductBySlug(
+  slug: string,
+): Promise<Product | null> {
+  if (!hasSupabaseEnv()) return null;
+  const supabase = await createSupabaseServerClient();
+  const { data, error } = await supabase
+    .from("products")
+    .select("id, slug, name, description, price_eur, quantity, image_path, published")
+    .eq("slug", slug)
+    .eq("published", true)
+    .maybeSingle();
+
+  if (error || !data) return null;
+  return {
+    id: data.id,
+    slug: data.slug,
+    name: data.name,
+    description: data.description ?? "",
+    priceEur: Number(data.price_eur),
+    quantity: data.quantity ?? 0,
+    imagePath: normalizePublicImagePath(data.image_path),
+    published: data.published ?? false,
+  };
+}
+
 export async function listAllProductsForAdmin(): Promise<Product[]> {
   if (!hasSupabaseEnv()) return [];
   const supabase = await createSupabaseServerClient();

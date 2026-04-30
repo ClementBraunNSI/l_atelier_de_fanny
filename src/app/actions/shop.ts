@@ -40,8 +40,26 @@ export async function signUpAction(formData: FormData) {
   }
   const supabase = await createSupabaseServerClient();
   const { error } = await supabase.auth.signUp({ email, password });
-  if (error) redirect(`/compte?error=${encodeURIComponent(error.message)}`);
-  redirect("/compte?message=verify-email");
+  if (error) {
+    const msg = error.message.toLowerCase();
+    if (msg.includes("rate limit")) {
+      redirect("/compte?error=signup-email-rate-limit");
+    }
+    if (msg.includes("already registered") || msg.includes("already been registered")) {
+      redirect("/compte?error=signup-email-already-registered");
+    }
+    redirect("/compte?error=signup-generic");
+  }
+
+  // En mode sans confirmation email, on connecte l'utilisateur juste après inscription.
+  const { error: signInError } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
+  if (signInError) {
+    redirect("/compte?message=signup-success");
+  }
+  redirect("/catalogue?message=welcome");
 }
 
 export async function signInAction(formData: FormData) {
@@ -49,7 +67,16 @@ export async function signInAction(formData: FormData) {
   const password = String(formData.get("password") ?? "");
   const supabase = await createSupabaseServerClient();
   const { error } = await supabase.auth.signInWithPassword({ email, password });
-  if (error) redirect("/compte?error=login-failed");
+  if (error) {
+    const msg = error.message.toLowerCase();
+    if (msg.includes("email not confirmed")) {
+      redirect("/compte?error=login-email-not-confirmed");
+    }
+    if (msg.includes("rate limit") || msg.includes("too many requests")) {
+      redirect("/compte?error=login-too-many-requests");
+    }
+    redirect("/compte?error=login-failed");
+  }
   redirect("/catalogue");
 }
 
@@ -59,6 +86,13 @@ export async function signOutAction() {
   redirect("/");
 }
 
+export async function forgotPasswordAction(formData: FormData) {
+  const email = String(formData.get("email") ?? "").trim();
+  if (!email) redirect("/compte?error=forgot-password-invalid");
+  // Flux temporaire sans envoi de mail.
+  redirect("/compte?message=forgot-password-manual");
+}
+
 export async function addToCartAction(formData: FormData) {
   const user = await requireUser();
   const productId = String(formData.get("productId") ?? "");
@@ -66,7 +100,7 @@ export async function addToCartAction(formData: FormData) {
   const supabase = await createSupabaseServerClient();
   const cartId = await getOrCreateActiveCartId(user.id);
   if (!cartId || !productId) {
-    redirect("/panier?error=add-failed");
+    redirect("/panier?error=cart-add-failed");
   }
 
   const { data: existing } = await supabase
@@ -77,14 +111,16 @@ export async function addToCartAction(formData: FormData) {
     .maybeSingle();
 
   if (existing?.id) {
-    await supabase
+    const { error } = await supabase
       .from("cart_items")
       .update({ quantity: existing.quantity + quantity })
       .eq("id", existing.id);
+    if (error) redirect("/panier?error=cart-add-failed");
   } else {
-    await supabase
+    const { error } = await supabase
       .from("cart_items")
       .insert({ cart_id: cartId, product_id: productId, quantity });
+    if (error) redirect("/panier?error=cart-add-failed");
   }
 
   revalidatePath("/catalogue");
@@ -98,12 +134,13 @@ export async function updateCartItemQuantityAction(formData: FormData) {
   const quantity = Math.max(1, Number(formData.get("quantity") ?? 1));
   const supabase = await createSupabaseServerClient();
   const cartId = await getOrCreateActiveCartId(user.id);
-  if (!cartId) return;
-  await supabase
+  if (!cartId) redirect("/panier?error=cart-update-failed");
+  const { error } = await supabase
     .from("cart_items")
     .update({ quantity })
     .eq("id", itemId)
     .eq("cart_id", cartId);
+  if (error) redirect("/panier?error=cart-update-failed");
   revalidatePath("/panier");
 }
 
@@ -112,8 +149,13 @@ export async function removeCartItemAction(formData: FormData) {
   const itemId = String(formData.get("itemId") ?? "");
   const supabase = await createSupabaseServerClient();
   const cartId = await getOrCreateActiveCartId(user.id);
-  if (!cartId) return;
-  await supabase.from("cart_items").delete().eq("id", itemId).eq("cart_id", cartId);
+  if (!cartId) redirect("/panier?error=cart-remove-failed");
+  const { error } = await supabase
+    .from("cart_items")
+    .delete()
+    .eq("id", itemId)
+    .eq("cart_id", cartId);
+  if (error) redirect("/panier?error=cart-remove-failed");
   revalidatePath("/panier");
 }
 
@@ -121,7 +163,12 @@ export async function checkoutAction() {
   await requireUser();
   const supabase = await createSupabaseServerClient();
   const { error } = await supabase.rpc("checkout_cart");
-  if (error) redirect("/panier?error=stock");
+  if (error) {
+    const msg = error.message.toLowerCase();
+    if (msg.includes("insufficient_stock")) redirect("/panier?error=checkout-stock");
+    if (msg.includes("cart_empty")) redirect("/panier?error=checkout-empty");
+    redirect("/panier?error=checkout-failed");
+  }
   revalidatePath("/panier");
   revalidatePath("/catalogue");
   revalidatePath("/admin");
@@ -138,9 +185,9 @@ export async function createProductAction(formData: FormData) {
   const imagePath = normalizeImagePath(String(formData.get("imagePath") ?? ""));
   const published = String(formData.get("published") ?? "") === "on";
 
-  if (!name) return;
+  if (!name) redirect("/admin?error=product-name-required");
   const supabase = await createSupabaseServerClient();
-  await supabase.from("products").insert({
+  const { error } = await supabase.from("products").insert({
     slug: slugInput ? slugify(slugInput) : slugify(name),
     name,
     description,
@@ -149,8 +196,10 @@ export async function createProductAction(formData: FormData) {
     image_path: imagePath,
     published,
   });
+  if (error) redirect("/admin?error=product-create-failed");
   revalidatePath("/catalogue");
   revalidatePath("/admin");
+  redirect("/admin?message=product-created");
 }
 
 export async function updateProductAction(formData: FormData) {
@@ -163,10 +212,10 @@ export async function updateProductAction(formData: FormData) {
   const quantity = Math.max(0, Number(formData.get("quantity") ?? 0));
   const imagePath = normalizeImagePath(String(formData.get("imagePath") ?? ""));
   const published = String(formData.get("published") ?? "") === "on";
-  if (!id || !name) return;
+  if (!id || !name) redirect("/admin?error=product-update-invalid");
 
   const supabase = await createSupabaseServerClient();
-  await supabase
+  const { error } = await supabase
     .from("products")
     .update({
       slug: slugInput ? slugify(slugInput) : slugify(name),
@@ -178,16 +227,20 @@ export async function updateProductAction(formData: FormData) {
       published,
     })
     .eq("id", id);
+  if (error) redirect("/admin?error=product-update-failed");
   revalidatePath("/catalogue");
   revalidatePath("/admin");
+  redirect("/admin?message=product-updated");
 }
 
 export async function deleteProductAction(formData: FormData) {
   await requireAdmin();
   const id = String(formData.get("id") ?? "");
-  if (!id) return;
+  if (!id) redirect("/admin?error=product-delete-invalid");
   const supabase = await createSupabaseServerClient();
-  await supabase.from("products").delete().eq("id", id);
+  const { error } = await supabase.from("products").delete().eq("id", id);
+  if (error) redirect("/admin?error=product-delete-failed");
   revalidatePath("/catalogue");
   revalidatePath("/admin");
+  redirect("/admin?message=product-deleted");
 }
