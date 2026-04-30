@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { getCurrentProfile, getCurrentUser, getCurrentUserCartCount } from "@/lib/shop";
 
 const nav = [
   { href: "/", label: "Accueil" },
@@ -7,13 +8,20 @@ const nav = [
   { href: "/contact", label: "Contact" },
 ];
 
-export function SiteHeader() {
+export async function SiteHeader() {
+  const [user, profile, cartCount] = await Promise.all([
+    getCurrentUser(),
+    getCurrentProfile(),
+    getCurrentUserCartCount(),
+  ]);
+  const isAdmin = profile?.role === "admin";
+
   return (
     <header className="sticky top-0 z-50 border-b border-orange-100/80 bg-white/90 backdrop-blur-md">
-      <div className="mx-auto flex h-14 max-w-6xl items-center justify-center gap-2 px-4 sm:h-16 sm:gap-3 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-3 px-4 sm:h-16 sm:px-6 lg:px-8">
         <nav
           aria-label="Navigation principale"
-          className="flex flex-wrap items-center justify-center gap-0.5 sm:gap-1"
+          className="flex flex-wrap items-center gap-0.5 sm:gap-1"
         >
           {nav.map((item) => (
             <Link
@@ -29,6 +37,32 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
+        <div className="flex items-center gap-2">
+          <Link
+            href="/panier"
+            className="rounded-lg px-2.5 py-1.5 text-[13px] font-medium text-stone-600 transition hover:bg-orange-50 hover:text-stone-800 sm:text-sm"
+          >
+            Panier{cartCount > 0 ? ` (${cartCount})` : ""}
+          </Link>
+          {isAdmin ? (
+            <Link
+              href="/admin"
+              className="rounded-lg px-2.5 py-1.5 text-[13px] font-medium text-orange-700 transition hover:bg-orange-50 sm:text-sm"
+            >
+              Admin
+            </Link>
+          ) : null}
+          <Link
+            href="/compte"
+            className={`rounded-lg px-2.5 py-1.5 text-[13px] font-medium transition sm:text-sm ${
+              user
+                ? "bg-orange-200/70 text-orange-950 hover:bg-orange-200"
+                : "text-stone-600 hover:bg-orange-50 hover:text-stone-800"
+            }`}
+          >
+            {user ? "Compte" : "Connexion"}
+          </Link>
+        </div>
       </div>
     </header>
   );

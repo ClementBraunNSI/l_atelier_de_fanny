@@ -1,19 +1,19 @@
 import Image from "next/image";
-import type { Product } from "@/lib/products";
+import { formatPrice, type Product } from "@/lib/shop";
 
 type ProductCardProps = {
   product: Product;
 };
 
 export function ProductCard({ product }: ProductCardProps) {
-  const hasImage = Boolean(product.image?.trim());
+  const hasImage = Boolean(product.imagePath?.trim());
 
   return (
     <article className="flex flex-col overflow-hidden rounded-2xl border border-orange-100/90 bg-white/95 shadow-sm ring-1 ring-orange-50/80">
       <div className="relative aspect-[4/3] w-full bg-orange-50/40">
         {hasImage ? (
           <Image
-            src={product.image as string}
+            src={product.imagePath as string}
             alt={product.name}
             fill
             className="object-cover"
@@ -40,7 +40,7 @@ export function ProductCard({ product }: ProductCardProps) {
               </svg>
             </div>
             <p className="mt-3 text-xs font-medium text-stone-500">
-              Ajoutez une image (chemin /boutique/…) via l’outil bureau
+              Image à renseigner dans l’espace admin
             </p>
           </div>
         )}
@@ -53,17 +53,12 @@ export function ProductCard({ product }: ProductCardProps) {
           {product.description}
         </p>
         <p className="text-base font-semibold text-orange-600">
-          {formatPrice(product.priceEuro)}
+          {formatPrice(product.priceEur)}
+        </p>
+        <p className="text-xs text-stone-500">
+          Stock disponible : {Math.max(0, product.quantity)}
         </p>
       </div>
     </article>
   );
-}
-
-function formatPrice(euros: number): string {
-  if (!Number.isFinite(euros)) return "—";
-  return new Intl.NumberFormat("fr-FR", {
-    style: "currency",
-    currency: "EUR",
-  }).format(euros);
 }

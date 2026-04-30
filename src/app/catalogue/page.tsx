@@ -1,22 +1,27 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { addToCartAction } from "@/app/actions/shop";
 import { PageHeading } from "@/components/page-heading";
 import { ProductCard } from "@/components/product-card";
-import { getPublishedProducts } from "@/lib/products";
+import { getCurrentUser, listPublishedProducts } from "@/lib/shop";
 
 export const metadata: Metadata = {
   title: "Boutique",
   description:
-    "Mercerie et créations de l’atelier — pièces ajoutées depuis l’outil de gestion.",
+    "Mercerie et créations de l’atelier — catalogue connecté à la base Supabase.",
 };
 
-export default function CataloguePage() {
-  const products = getPublishedProducts();
+export default async function CataloguePage() {
+  const [products, user] = await Promise.all([
+    listPublishedProducts(),
+    getCurrentUser(),
+  ]);
 
   return (
     <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
       <PageHeading
         title="Boutique"
-        description="Sélection d’articles et créations. Les fiches sont alimentées via l’application bureau (dossier tools/boutique-admin)."
+        description="Sélection d’articles et créations. Ajoutez des articles au panier puis validez votre commande."
       />
 
       {products.length === 0 ? (
@@ -25,8 +30,7 @@ export default function CataloguePage() {
             Aucun produit publié pour le moment
           </p>
           <p className="mx-auto mt-2 max-w-md text-sm text-stone-600">
-            Utilisez l’outil Python pour ajouter des articles et cochez « Publié »
-            pour qu’ils s’affichent ici après enregistrement du fichier JSON.
+            Aucun article publié pour l’instant.
           </p>
         </div>
       ) : (
@@ -34,6 +38,28 @@ export default function CataloguePage() {
           {products.map((product) => (
             <li key={product.id}>
               <ProductCard product={product} />
+              <div className="mt-3">
+                {user ? (
+                  <form action={addToCartAction}>
+                    <input type="hidden" name="productId" value={product.id} />
+                    <input type="hidden" name="quantity" value="1" />
+                    <button
+                      type="submit"
+                      disabled={product.quantity < 1}
+                      className="inline-flex rounded-full bg-orange-300 px-4 py-2 text-sm font-semibold text-orange-950 transition hover:bg-orange-400 disabled:cursor-not-allowed disabled:opacity-50"
+                    >
+                      {product.quantity > 0 ? "Ajouter au panier" : "Rupture de stock"}
+                    </button>
+                  </form>
+                ) : (
+                  <Link
+                    href="/compte"
+                    className="inline-flex rounded-full border border-orange-200 bg-white px-4 py-2 text-sm font-semibold text-stone-700 transition hover:bg-orange-50"
+                  >
+                    Connectez-vous pour commander
+                  </Link>
+                )}
+              </div>
             </li>
           ))}
         </ul>
